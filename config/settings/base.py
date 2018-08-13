@@ -39,11 +39,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres://localhost/sangseokgram'),
+    'default': env.db('DATABASE_URL', default='postgres://super:Chlwjdfks1030!@localhost:10846/sangseokgram'),
+    #'default': env.db('DATABASE_URL', default='postgres://ilovet15_developer:Chlwjdfks1030!@:5432/ilovet15_private'),
 }
 
 DATABASES['default']['ATOMIC_REQUESTS'] = True
-DATABASES['default']['PASSWORD'] = "seok8167"
+#DATABASES['default']['PASSWORD'] = "seok8167"
 
 # URLS
 # ------------------------------------------------------------------------------
