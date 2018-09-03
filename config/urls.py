@@ -20,6 +20,7 @@ urlpatterns = [
         include("sangseokgram.users.urls", namespace="users"),
     ),
     path("images/", include("sangseokgram.images.urls", namespace="images")),
+    path("notifications/", include("sangseokgram.notifications.urls", namespace="notifications")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
 ] + static(

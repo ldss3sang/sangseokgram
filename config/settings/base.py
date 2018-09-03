@@ -70,11 +70,13 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'taggit'
 ]
 LOCAL_APPS = [
     'sangseokgram.users.apps.UsersAppConfig',
     # Your stuff: custom apps go here
-    'sangseokgram.images.apps.ImagesConfig'
+    'sangseokgram.images.apps.ImagesConfig',
+    'sangseokgram.notifications.apps.NotificationsConfig'
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -241,3 +243,4 @@ SOCIALACCOUNT_ADAPTER = 'sangseokgram.users.adapters.SocialAccountAdapter'
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+TAGGIT_CASE_INSENSITIVE = True

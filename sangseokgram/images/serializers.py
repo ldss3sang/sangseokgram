@@ -2,7 +2,16 @@ from rest_framework import serializers
 from . import models
 from sangseokgram.users import models as user_models
 
-class UserProfileImageSerializer(serializers.ModelSerializer):
+class SmallImageSerializer(serializers.ModelSerializer):
+    """ Used for the notifications """
+
+    class Meta:
+        model = models.Image
+        fields = (
+            'file',
+        )
+
+class CountImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Image

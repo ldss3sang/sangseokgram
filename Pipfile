@@ -4,6 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pylint = "*"
 
 [packages]
 pytz = "==2018.5"
@@ -32,6 +33,7 @@ Werkzeug = "==0.14.1"
 Sphinx = "==1.7.5"
 factory_boy = "==2.11.1"
 django_coverage_plugin = "==1.5.0"
+django-taggit = "*"
 
 [requires]
 python_version = "3.6"
