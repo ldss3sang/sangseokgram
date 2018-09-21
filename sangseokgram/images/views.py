@@ -8,7 +8,7 @@ from sangseokgram.notifications import views as notification_views
 
 # Create your views here.
 
-class Feed(APIView):
+class Images(APIView):
     
     def get(self, request, format=None):
         
@@ -37,6 +37,21 @@ class Feed(APIView):
         serializer = serializers.ImageSerializer(sorted_list, many=True)
         
         return Response(data=serializer.data)
+
+    def post(self, request, format=None):
+
+        user = request.user
+
+        serializer = serializers.InputImageSerializer(data=request.data)
+
+        if serializer.is_valid():
+
+            serializer.save(creator=user)
+
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+
+        else:
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LikeImage(APIView):
     
@@ -174,10 +189,17 @@ class ModerateComments(APIView):
 
 class ImageDetail(APIView):
     
+    def find_own_image(self, image_id, user):
+        try:
+            image = models.Image.objects.get(id=image_id)
+            return image
+        except models.Image.DoesNotExist:
+            return None
+
     def get(self, request, image_id, format=None):
 
         try:
-            image = models.Image.Objects.get(id=image_id)
+            image = models.Image.objects.get(id=image_id)
         except models.Image.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         
@@ -189,9 +211,9 @@ class ImageDetail(APIView):
         
         user = request.user
 
-        try:
-            image = models.Image.objects.get(id=image_id, creator=user)
-        except models.Image.DoesNotExist:
+        image = self.find_own_image(image_id, user)
+
+        if image is None:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
         
         serializer = serializers.InputImageSerializer(image, data=request.data, partial=True)
@@ -204,3 +226,16 @@ class ImageDetail(APIView):
         else:
 
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, image_id, format=None):
+        
+        user = request.user
+
+        image = self.find_own_image(image_id, user)
+
+        if image is None:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+        
+        image.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
