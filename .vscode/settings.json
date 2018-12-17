@@ -3,5 +3,6 @@
     "python.pythonPath": "C:\\Python36\\python.exe",
     "python.linting.flake8Enabled": false,
     "python.linting.enabled": true,
+    "jshint.enable": false,
     //"python.pythonPath": "C:\\Users\\sangseok.doe\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe"
 }
